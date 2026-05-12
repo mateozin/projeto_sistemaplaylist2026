@@ -7,4 +7,4 @@ class Musica:
         self.bpm = bpm
 
     def __str__(self):
-        return f"{self.id} | {self.titulo} - {self.artista} \nGÊNERO: {self.genero} \nBPM: {self.bpm}"
+        return f"{self.id} | {self.titulo}, de {self.artista} \nGÊNERO: {self.genero} \nBPM: {self.bpm}"

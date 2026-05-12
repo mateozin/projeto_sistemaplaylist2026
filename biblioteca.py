@@ -32,4 +32,20 @@ class Biblioteca:
             anterior = atual
             atual = atual.proximo
         return False
+    def listar(self):
+        musicas = []
+        atual = self._cabeca
+        while atual:
+            musicas.append(atual.musica)
+            atual = atual.proximo
+        return musicas
+    def buscar_id(self,id):
+        atual = self._cabeca
+        while atual:
+            if atual.musica.id == id:
+                return atual.musica
+            atual = atual.proximo
+        return None
+    def vazia(self):
+        return self._cabeca is None
     
