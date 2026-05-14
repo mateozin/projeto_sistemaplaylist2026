@@ -2,6 +2,7 @@ from biblioteca import *
 from musica import *
 from fila import *
 from faker import Faker
+import readchar
 import os
 import random
 fake = Faker("pt_BR")
@@ -17,7 +18,6 @@ def adicionar_al(biblioteca, quantidade):
         genero= random.choice(generos)
         bpm = random.randint(60,180)
         biblioteca.adicionar(titulo, artista, genero, bpm)
-    print("Dados falsos criados com sucesso")
 
 def ver_bpm():
     while True:
@@ -49,15 +49,17 @@ while True:
         print("Isso não é um número válido")
         escolha=-1
     if escolha==1:
-        os.system('cls' if os.name == 'nt' else 'clear')
         print("OK! Comece digitando o título da música e siga concedendo as informações necessitadas.")
         titulo=input("Título: ")
         artista=input("Artista: ")
         genero=input("Gênero: ")
         bpm = ver_bpm()
         m = biblioteca.adicionar(titulo, artista, genero, bpm)
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==2:
-        os.system('cls' if os.name == 'nt' else 'clear')
         print("OK! Digite o ID da musica que deseja remover da biblioteca")
         if biblioteca.vazia():
             print("Biblioteca vazia. Cancelando operação")
@@ -67,16 +69,22 @@ while True:
                 print(f"Música com o ID {verid} removida com sucesso.")
             else:
                 print(f"Música com ID {verid} não encontrada.")
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==3:
-        os.system('cls' if os.name == 'nt' else 'clear')
         musicas = biblioteca.listar()
         if biblioteca.vazia():
             print("Biblioteca vazia")
         else:
             for m in musicas:
                 print(f"{m}")
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==4:
-        os.system('cls' if os.name == 'nt' else 'clear')
         print("OK! Digite o id da música que deseja encontrar na biblioteca")
         verid=ver_id()
         ms = biblioteca.buscar_id(verid)
@@ -84,8 +92,11 @@ while True:
             print(f"Música encontrada: {ms}")
         else:
             print(f"Música com ID {verid} não encontrada")
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==5:
-        os.system('cls' if os.name == 'nt' else 'clear')
         print("OK! Montando filas de reprodução baseadas no humor")
         if biblioteca.vazia():
             print("Nenhuma fila criada, cancelando operação")
@@ -97,8 +108,11 @@ while True:
                     print(f"Playlist {humor} com {fila.tamanho()} músicas")
             filas_criadas = True
             print("Playlist criada com sucesso.")
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==6:
-        os.system('cls' if os.name == 'nt' else 'clear')
         if filas_criadas == False:
             print("Nenhuma fila criada, cancelando operação")
         else:
@@ -116,8 +130,11 @@ while True:
                     historico.enqueue(m)
                     print(f"Reproduzindo {m}")
                     print(f"Histórico: {historico.tamanho()} faixas executadas")
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==7:
-        os.system('cls' if os.name == 'nt' else 'clear')
         if filas_criadas == False:
             print("Nenhuma fila criada, cancelando operação")
         else:
@@ -134,8 +151,11 @@ while True:
                 print(f"Fila {humor} com {len(musicas)} músicas.")
                 for i, m in enumerate(musicas,1):
                     print(f'Ordem {i} - ID {m}')
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == "nt" else 'clear')     
     elif escolha==8:
-        os.system('cls' if os.name == "nt" else 'clear')     
         if historico.vazia():
             print("Histórico vazio, nenhuma musica reproduzida. Cancelando operação.")
         else:
@@ -143,8 +163,11 @@ while True:
             print(f"{len(musicas)} músicas reproduzidas:")
             for i, m in enumerate(musicas, 1):
                 print(f"Executada em {i} - ID {m}")
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==9:
-        os.system('cls' if os.name == "nt" else 'clear')
         print("OK! Mostrando as estatísticas do usuário:")
         if biblioteca.vazia():
             print("Biblioteca vazia! Cancelando operação.")
@@ -158,11 +181,24 @@ while True:
                     fila_humor = gerenciador.def_fila(humor)
                     print(f"Fila {humor} está com {fila_humor.tamanho()} músicas")
             print(f'E já foram reproduzidas {historico.tamanho()} músicas.')
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==10:
-        os.system('cls' if os.name == "nt" else 'clear')
-        print("OK! Criando 30 músicas aleatórias.")
-        adicionar_al(biblioteca, 30)
+        print("*Valores recomendados acima de 30")
+        try:
+            qtd = int(input("Quantas músicas deseja criar: "))
+        except ValueError:
+            print("Isso não é um número válido")
+        print(f"OK! Criando {qtd} músicas aleatórias.")
+        adicionar_al(biblioteca, qtd)
+        print("Pressione qualquer tecla para continuar ou pressione a tecla L para continuar e limpar o console.")
+        k = readchar.readkey()
+        if k.lower() == "l":
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif escolha==0:
+        print("[!] Encerrando...")
         break
 
 
